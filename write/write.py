@@ -6,7 +6,7 @@ import json
 import pandas as pd
 
 
-def write_out(directory: str = "", file_name: str = "", ext: str = "", data: object = None):
+def write_out(data, directory: str, file_name: str, ext: str):
     """
     Write files + create directories if not yet present
     :param directory:
@@ -17,11 +17,11 @@ def write_out(directory: str = "", file_name: str = "", ext: str = "", data: obj
     """
     # w+: Opens a file for both writing and reading. Overwrites the existing file if the file exists
     # If the file does not exist, creates a new file for reading and writing.
-    if isinstance(data[0], Player):
-        data = [x.__dict__ for x in data]  # serialize Player objects
+    if isinstance(data.first, Player):
+        serialized = [x.__dict__ for x in data]  # serialize Player objects
         with open(os.path.join(directory, (file_name + ext)), mode='w+', encoding='utf-8') as f:
-            json.dump(data, f, indent=2)
-            print(f'{file_name}{ext} successfully saved to {getDir(directory)}')
+            json.dump(serialized, f, indent=2)
+            print(f'{file_name}{ext} successfully saved to {directory}')
             f.close()
     else:
         with open(os.path.join(directory, (file_name + ext)), mode='w+', encoding='utf-8') as f:
