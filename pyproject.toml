@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "mtbl-iokit"
+version = "0.1.0"
+description = "MTBL IOKit for file read/writes/mods"
+authors = ["Taylor Pubins <tpubz@icloud.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.2.0"
+pyarrow = "^15.0.0"
+
+[tool.poetry.group.dev.dependencies]
+coverage = "^7.4.1"
+pytest = "^8.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
