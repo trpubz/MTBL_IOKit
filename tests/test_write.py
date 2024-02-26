@@ -1,7 +1,6 @@
 import os
 import tempfile
 import json
-import csv
 import pytest
 import pandas as pd
 
