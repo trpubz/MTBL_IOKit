@@ -35,7 +35,7 @@ jobs:
       - run:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
-          command: poetry run pytest
+          command: poetry run pytest --cov .
       - codecov/upload
 
 # Orchestrate jobs using workflows

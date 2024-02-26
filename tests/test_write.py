@@ -1,8 +1,10 @@
 import os
+from unittest.mock import patch  # For mocking functions like os.path
 import pytest
 import pandas as pd
 
 import write
+from mtbl_playerkit import Player
 
 
 class TestWrite:
@@ -14,6 +16,11 @@ class TestWrite:
         self.df = pd.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6]})
         yield
         os.remove(self.full_path)
+
+    @patch("mtbl_playerkit")
+    def test_write_out_player_serialized(self):
+        player = Player(name="Corbin Carrol", team="ARI")
+        write.write_out(player)
 
     def test_export_dataframe_to_csv(self):
         write.export_dataframe(self.df, "test", ".csv", "./temp")
