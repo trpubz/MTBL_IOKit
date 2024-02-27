@@ -53,6 +53,14 @@ class TestRead:
         assert len(data) == 2
         assert isinstance(data[0], dict)
 
+    def test_read_in_html_as_string(self):
+        fixture_dir = "tests/fixtures"
+        file = "temp_espn_player_universe"
+        ext = ".html"
+        data = read.read_in_as(fixture_dir, file, ext, read.IOKitDataTypes.STR)
+        assert len(data) > 0
+        assert isinstance(data, str)
+
     def test_bad_file_path(self):
         with pytest.raises(FileNotFoundError):
             read.read_in_as("/path/to/file", "test", ".json", read.IOKitDataTypes.JSON)

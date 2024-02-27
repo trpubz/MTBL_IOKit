@@ -16,6 +16,7 @@ class IOKitDataTypes(Enum):
     PLAYER = "player"
     JSON = "json"
     CSV = "csv"
+    STR = "str"
 
 
 def read_in_as(
@@ -25,13 +26,14 @@ def read_in_as(
         as_type: IOKitDataTypes = IOKitDataTypes.PLAYER) -> any:
     """
     Read in data as specified by filename and return it as specified by as_type
-    :param directory: location of file
+    :param directory: location of file, relative or absolute path
     :param file_name: name of file
     :param file_type: file extension
     :param as_type: DataTypes enum; PLAYER -- mtbl_playerkit type, JSON, CSV
     :return: in-memory file IO for specified data type
     """
     full_path = os.path.join(directory, file_name + file_type)
+    full_path = os.path.abspath(full_path)
     try:
         with open(full_path, "r") as blob:
             match file_type:
@@ -42,9 +44,11 @@ def read_in_as(
                     structured_blob = csv.DictReader(blob)
                     # structured_blob_headers = next(structured_blob)
                     structured_blob = list(structured_blob)
+                case ".html":
+                    structured_blob = blob.read()
 
     except FileNotFoundError:
-        raise FileNotFoundError("File not found at '{full_path}'")
+        raise FileNotFoundError(f"File not found at '{full_path}'")
     except OSError as e:
         print(f"Error opening '{full_path}': {e}")
         return None
