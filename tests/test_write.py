@@ -4,7 +4,7 @@ import json
 import pytest
 import pandas as pd
 
-import write
+from mtbl_iokit import write
 from mtbl_playerkit import Player
 
 

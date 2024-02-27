@@ -4,8 +4,7 @@ import json
 import pytest
 import pandas as pd
 
-import read
-import write
+from mtbl_iokit import read, write
 from mtbl_playerkit import Player
 
 
@@ -66,7 +65,7 @@ class TestRead:
         monkeypatch.setattr("builtins.open", mock_open_fn)
 
     def test_os_error(self, mock_open):
-        result = read.read_in_as("/path","some_file.txt")
+        result = read.read_in_as("/path", "some_file.txt")
 
         # Assert that the function returns None as expected
         assert result is None
