@@ -36,7 +36,8 @@ jobs:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
           command: poetry run pytest --cov .
-      - codecov/upload
+      - codecov/upload:
+          cli-args: -v
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows

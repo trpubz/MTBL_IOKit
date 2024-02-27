@@ -40,8 +40,10 @@ class TestWrite:
             assert data[0]['name'] == "Corbin Carrol"
 
     def test_write_out_non_pydantic_model(self, temp_dir):
-        csv = """name, team
-                    corbin carrol, ARI"""
+        csv = """
+        name, team
+        corbin carrol, ARI
+        """
 
         write.write_out(csv, temp_dir, "player_data", ".csv")
         # Verify file presence
