@@ -4,6 +4,10 @@ version = "0.1.0"
 description = "MTBL IOKit for file read/writes/mods"
 authors = ["Taylor Pubins <tpubz@icloud.com>"]
 readme = "README.md"
+packages = [
+    { include = "read" },
+    { include = "write" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
