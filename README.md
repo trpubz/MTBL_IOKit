@@ -5,4 +5,4 @@
 Reusable file IO functionality for use in the MTBL ETL pipeline
 
 ## Dependencies
-mtbl-playerkit = { git = "https://github.com/trpubz/MTBL_PlayerKit", tag = "v0.2.0" }
+mtbl-playerkit = { git = "https://github.com/trpubz/MTBL_PlayerKit", tag = "v0.1.0" }
