@@ -44,9 +44,9 @@ class TestRead:
         assert data.shape == (2, 2)
 
     def test_read_in_csv_as_dataframe(self):
-        data = read.read_in_as(self.temp_dir, "player_data", ".csv", read.IOKitDataTypes.DATAFRAME)
-        assert len(data) == 2
-        assert data.shape == (2, 2)
+        data = read.read_in_as("./tests/fixtures", "bats_savant", ".csv",
+                               read.IOKitDataTypes.DATAFRAME)
+        assert isinstance(data.iloc[0]["player_id"], str)
 
     def test_read_in_and_return_data(self):
         data = read.read_in_as(self.temp_dir, "player_data", ".json", read.IOKitDataTypes.JSON)
