@@ -1,6 +1,7 @@
 """
 Read files and put in memory
 """
+import codecs
 import csv
 import os
 import json
@@ -41,6 +42,9 @@ def read_in_as(
                     # .load Expects a file-like object that supports text reading
                     structured_blob = json.load(blob)
                 case ".csv":
+                    # trim the BOM if it exists
+                    blob = (line[1:] if line.startswith(codecs.BOM_UTF8.decode()) else line for
+                            line in blob)
                     structured_blob = csv.DictReader(blob)
                     # structured_blob_headers = next(structured_blob)
                     structured_blob = list(structured_blob)
