@@ -10,7 +10,7 @@ python = "^3.12"
 pandas = "^2.2.0"
 pyarrow = "^15.0.0"
 pydantic = "^2.6.0"
-mtbl-playerkit = { git = "https://github.com/trpubz/MTBL_PlayerKit", tag = "v0.1.0" }
+mtbl-playerkit = { git = "https://github.com/trpubz/MTBL_PlayerKit", tag = "v0.2.0" }
 
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.4.1"
