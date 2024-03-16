@@ -5,7 +5,7 @@ import pytest
 import pandas as pd
 
 from mtbl_iokit import write
-from mtbl_playerkit import Player
+from mtbl_playerkit import Player, ESPNPlayer
 
 
 class TestWrite:
@@ -38,6 +38,20 @@ class TestWrite:
             data = json.load(f)
             assert len(data) == 2
             assert data[0]['name'] == "Corbin Carrol"
+
+    def test_write_out_espn_player_serialized(self, temp_dir):
+        plyr1 = ESPNPlayer(name="Corbin Carrol", team="ARI", owner="TP", ovr=1, positions=["OF"],
+                           player_stats={"HR": 26}, espn_id="3")
+        assert plyr1.name == "Corbin Carrol"
+        assert isinstance(plyr1.player_stats["HR"], int)
+
+        file_path = os.path.join(temp_dir, "player_data.json")
+        write.write_out([plyr1], temp_dir, "player_data", ".json")
+
+        with open(file_path, 'r') as f:
+            data = json.load(f)
+            assert data[0]['name'] == "Corbin Carrol"
+            assert isinstance(data[0]["player_stats"]["HR"], int)
 
     def test_write_out_non_pydantic_model(self, temp_dir):
         csv = """
