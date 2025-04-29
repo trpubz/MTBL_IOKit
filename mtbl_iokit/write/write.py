@@ -20,13 +20,17 @@ def write_out(data: any, directory: str, file_name: str, ext: str):
     # w+: Opens a file for both writing and reading. Overwrites the existing file if the file exists
     # If the file does not exist, creates a new file for reading and writing.
     with open(os.path.join(directory, (file_name + ext)), mode='w+', encoding='utf-8') as f:
-        if isinstance(data[0], Player):
-            # Pydantic's 'dict()' method for each object
-            serialized = [x.model_dump() for x in data]
-            json.dump(serialized, f, indent=2)
-        else:
-            f.write(data)
+        try:
+            if isinstance(data[0], Player):
+                # Pydantic's 'dict()' method for each object
+                serialized = [x.model_dump() for x in data]
+                json.dump(serialized, f, indent=2)
+                return
 
+        except KeyError:
+            pass
+
+        f.write(data)
         f.close()
 
 
